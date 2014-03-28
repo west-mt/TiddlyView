@@ -4,11 +4,11 @@
 	<meta content="text/html; charset=Shift-JIS" http-equiv="Content-Type" />
 	<meta content="width=device-width" name="viewport" />
 	<link media="all" href="css/toast/toast.css" type="text/css" rel="stylesheet" />
-	<link media="all" href="css/toast_style.css" type="text/css" rel="stylesheet" />
 	<link media="all" href="css/tiddlyview.css" type="text/css" rel="stylesheet" />
 	<title>Tiddly Viewer</title>
 	<script src="lib/jquery-1.11.0.min.js" type="text/javascript"></script>
 	<script src="lib/markdown.js" type="text/javascript"></script>
+	<script src="lib/dialect_tiddly.js" type="text/javascript"></script>
     <script src="lib/tiddlyview.js" type="text/javascript"></script>
   </head>
   <body>
@@ -30,6 +30,40 @@
 この議事録は3月28日に行われた技術方針検討会のメモである。
 この会議はフィクションです。実際には存在しません。
 
+インライン要素。**ボールド**、そして//イタリック//
+
+* これが*箇条書き*の1段目
+改行して1段目の続き
+** これが箇条書きの2段目
+ 2段目の続き。
+** 2段目の2項目目
+* 1段目の二つ目の項目
+* 1段目の三つ目の項目
+
+* 新たな箇条書きの1段目
+# 数字付き(<ol>)の1段目
+## 数字付き(<ol>)の2段目
+## 数字付き(<ol>)の2段目-2
+  2段目-2の続き
+# 数字付き(<ol>)の1段目-2
+  1段目-2の続き
+
+* <code>&#96;backticks&#96;</code> for `code`
+** Alternatively, <code>&#96;&#96;double backticks allows &#96;embedded&#96; backticks&#96;&#96;</code>
+* `''bold''` for ''bold text''
+* `//italic//` for //italic text//
+* `__underscore__` for __underscored text__
+* `^^superscript^^` for ^^superscript^^ text
+* `,,subscript,,` for ,,subscripted,, text
+* `~~strikethrough~~` for ~~strikethrough~~ text
+
+! 見出し1
+
+!! 見出し2
+
+!!! 見出し3
+
+
 An h1 header
 ============
 
@@ -43,6 +77,15 @@ look like:
 
 > Block quotes are
 > written like so.
+
+* <code>&#96;backticks&#96;</code> for `code`
+** Alternatively, <code>&#96;&#96;double backticks allows &#96;embedded&#96; backticks&#96;&#96;</code>
+* `''bold''` for ''bold text''
+* `//italic//` for //italic text//
+* `__underscore__` for __underscored text__
+* `^^superscript^^` for ^^superscript^^ text
+* `,,subscript,,` for ,,subscripted,, text
+* `~~strikethrough~~` for ~~strikethrough~~ text
 
 An h2 header
 ------------
