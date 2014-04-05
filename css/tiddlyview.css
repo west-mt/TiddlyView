@@ -112,6 +112,16 @@ blockquote {
   color: #181165;
 }
 
+ul, ol, dl {
+  margin-top: 0em;
+  margin-bottom: 0em;
+}
+
+ul.top, ol.top, dl.top {
+  margin-top: 0.1em;
+  margin-bottom: 1.5em;
+}
+
 pre {
   /*
   display: inline-block;
