@@ -1,17 +1,16 @@
-
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  margin: 0;
-  font-weight: bold;
-  color: #333333;
-  line-height: 1.2;
-  margin-top: 0.8em;
-  margin-bottom: 0.4em;
-  text-rendering: optimizelegibility;
+	margin: 0;
+	font-weight: bold;
+	color: #333333;
+	line-height: 1.2;
+	margin-top: 0.8em;
+	margin-bottom: 0.4em;
+	text-rendering: optimizelegibility;
 }
 h1 small,
 h2 small,
@@ -19,136 +18,180 @@ h3 small,
 h4 small,
 h5 small,
 h6 small {
-  font-weight: normal;
-  color: #999999;
+	font-weight: normal;
+	color: #999999;
 }
 h1 {
-  font-size: 2.2em;
-  border-bottom: 1px solid #dddddd;
+	font-size: 2.2em;
+	border-bottom: 1px solid #dddddd;
 }
 h1 small {
-  font-size: 1.8em;
+	font-size: 1.8em;
 }
 h1.title {
-  margin-bottom: 9px;
-  font-size: 3.6em;
-  letter-spacing: -1px;
-  line-height: 1;
-  border-bottom: none;
+	margin-bottom: 9px;
+	font-size: 3.6em;
+	letter-spacing: -1px;
+	line-height: 1;
+	border-bottom: none;
 }
 h2 {
-  font-size: 1.8em;
-  border-bottom: 1px solid #dddddd;
+	font-size: 1.8em;
+	border-bottom: 1px solid #dddddd;
 }
 h2 small {
-  font-size: 1.4em;
+	font-size: 1.4em;
 }
 h3 {
-  font-size: 1.4em;
+	font-size: 1.4em;
 }
 h3 small {
-  font-size: 1.2em;
+	font-size: 1.2em;
 }
 h4 {
-  font-size: 1.2em;
+	font-size: 1.2em;
 }
 h4 small {
-  font-size: 1em;
+	font-size: 1em;
 }
 h5 {
-  font-size: 1em;
+	font-size: 1em;
 }
 h6 {
-  font-size: 0.8em;
-  text-transform: uppercase;
+	font-size: 0.8em;
+	text-transform: uppercase;
 }
 
 
 .grids h1{
-  border-bottom: none;
-  line-height: 1;
+	border-bottom: none;
+	line-height: 1;
 }
 .grids h2{
-  border-bottom: none;
-  line-height: 1;
+	border-bottom: none;
+	line-height: 1;
 }
 .grids h3{
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
-  line-height: 1;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	line-height: 1;
 }
 .grids p{
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
 }
 .grids{
-  margin-top: 0.5em;
-  margin-bottom: 1em;
+	margin-top: 0.5em;
+	margin-bottom: 1em;
 }
 .grids [class*='grid-']{
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
 }
 
 
+html,body {
+	height:100%;
+}
+
 body {
-  /*background: -webkit-linear-gradient(#ffe1e6, #fff) repeat-x;*/
-  /*font-family: adelle, Georgia, Times New Roman, serif;*/
-  color: #222;
-  margin-top: 1em;
-  margin-bottom: 3em;
-  line-height: 1.2;
+	/*background: -webkit-linear-gradient(#ffe1e6, #fff) repeat-x;*/
+	/*font-family: adelle, Georgia, Times New Roman, serif;*/
+	color: #222;
+	line-height: 1.2;
+
+	margin: 0;
+}
+
+
+#drop_zone{
+	width: 100%;
+	height: 100%;
+}
+
+#notice{
+	padding: 50px;
+	text-align: center;
+	font-size: 1.4em;
+	color: #909090;
+}
+
+#preview {
+	margin-top: 2em;
+	margin-left: 2em;
+	margin-right: 2em;
+	margin-bottom: 14em;
+	overflow: auto;
+}
+
+#footer {
+	background-color: #444;
+	bottom: 0;
+	color: #fff;
+	width: 100%;
+	height: 180px;
+	position: fixed;
+}
+
+#edit {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+	height: 100%;
+	padding: 0.8em;
 }
 
 a {
-  color: #181165;
-  font-weight: 700;
-  text-decoration: none;
+	color: #181165;
+	font-weight: 700;
+	text-decoration: none;
 }
 
 
 blockquote {
-  background: #ededee;
-  color: #181165;
+	background: #ededee;
+	color: #181165;
 }
 
 li {
-  margin-bottom: 0.2em;
+	margin-bottom: 0.2em;
 }
 
 ul, ol, dl {
-  margin-top: 0em;
-  margin-bottom: 0em;
+	margin-top: 0em;
+	margin-bottom: 0em;
 }
 
 ul.top, ol.top, dl.top {
-  margin-top: 0.0em;
-  margin-bottom: 1.5em;
+	margin-top: 0.0em;
+	margin-bottom: 1.5em;
 }
 
 pre {
-  /*
-  display: inline-block;
-  color: #181165;
-  */
-  padding: 0.5em;
-  background: #fdfdbb;
+	/*
+	  display: inline-block;
+	  color: #181165;
+	  */
+	padding: 0.5em;
+	background: #fdfdbb;
 }
 
 p {
-  margin-top: 0.5em;
-  margin-bottom: 0.0em;
+	margin-top: 0.5em;
+	margin-bottom: 0.0em;
 }
 
 mark {
-  /*font-weight: bold;*/
-  background-color: #ffbb00;
+	/*font-weight: bold;*/
+	background-color: #ffbb00;
 }
 
 
-textarea{
-	width: 100%;
-	height: 100%;
+#footer textarea{
+	width: 100% !important;
+	height: 100%  !important;
+	font-family: monospace !important;
+    border: 1px solid #B9C9CE;
+	resize: vertical;
 }
 
 .left_col { float: left; width: 50%; }
