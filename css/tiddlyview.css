@@ -109,11 +109,23 @@ body {
 	height: 100%;
 }
 
+#drop_zone input[type="file"] {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  cursor: default;
+}
+
 #notice{
 	padding: 50px;
 	text-align: center;
 	font-size: 1.4em;
 	color: #909090;
+	display: none;
 }
 
 #preview {
