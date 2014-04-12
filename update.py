@@ -9,6 +9,12 @@ import tempfile
 import zipfile
 
 
+def prompt(msg):
+    print msg,
+    r = raw_input()
+    return r
+
+
 if os.path.exists('.git'):
     print 'This directory is git repository!'
     print 'Try to use "git pull".'
@@ -47,10 +53,21 @@ for info in zipf.infolist():
         fname = info.filename[top_dir_len:]
         if fname[-1] == '/':
             if not os.path.exists(fname):
-                os.mkdir(fname)
-                print 'Create: ' + fname
+                if prompt('Create new directory "'+fname+'"? (y/N)') == 'y':
+                    os.mkdir(fname)
+                    print 'Create: ' + fname
         else:
-            print fname + ":", info.file_size
+            if not os.path.exists(fname):
+                if prompt('Create new file "'+fname+'"? (y/N)') == 'y':
+                    data = zipf.read(info)
+                    open(fname, 'wb').write(data)
+                    print 'Create: ' + fname
+            else:
+                if os.path.getsize(fname) != info.file_size:
+                    if prompt('Update modified file "'+fname+'"? (y/N)') == 'y':
+                        data = zipf.read(info)
+                        open(fname, 'wb').write(data)
+                        print 'Update: ' + fname
     
 zipf.close()
 tempf.close()
