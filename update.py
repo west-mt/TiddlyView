@@ -6,10 +6,11 @@ import sys
 import urllib2
 import tempfile
 import zipfile
+import hashlib
 try:
-  import simplejson as json
+    import simplejson as json
 except:
-  import json      
+    import json      
 
 
 def prompt(msg):
@@ -52,6 +53,7 @@ tempf.seek(0)
 zipf = zipfile.ZipFile(tempf)
 
 top_dir_len = -1
+overwrite = False
 
 print 'Finding modified files...'
 for info in zipf.infolist():
@@ -61,18 +63,39 @@ for info in zipf.infolist():
         fname = info.filename[top_dir_len:]
         if fname[-1] == '/':
             if not os.path.exists(fname):
-                if prompt('Create new directory "'+fname+'"? (y/N)') == 'y':
+                
+                r = 'n'
+                if not overwrite:
+                    r = prompt('Create new directory "'+fname+'"? (y/N/all)')
+                    if r == 'all':
+                        overwrite = True
+                if r == 'y' or overwrite:
                     os.mkdir(fname)
                     print 'Create: ' + fname
         else:
             if not os.path.exists(fname):
-                if prompt('Create new file "'+fname+'"? (y/N)') == 'y':
+
+                r = 'n'
+                if not overwrite:
+                    r = prompt('Create new file "'+fname+'"? (y/N/all)')
+                    if r == 'all':
+                        overwrite = True
+                if r == 'y' or overwrite:
                     data = zipf.read(info)
                     open(fname, 'wb').write(data)
                     print 'Create: ' + fname
             else:
-                if os.path.getsize(fname) != info.file_size:
-                    if prompt('Update modified file "'+fname+'"? (y/N)') == 'y':
+                zip_md5 = hashlib.md5(zipf.read(info)).hexdigest()
+                orig_md5 = hashlib.md5(open(fname, 'rb').read()).hexdigest()
+
+                if zip_md5 != orig_md5:
+
+                    r = 'n'
+                    if not overwrite:
+                        r = prompt('Update modified file "'+fname+'"? (y/N/all)')
+                        if r == 'all':
+                            overwrite = True
+                    if r == 'y' or overwrite:
                         data = zipf.read(info)
                         open(fname, 'wb').write(data)
                         print 'Update: ' + fname
