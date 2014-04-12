@@ -26,6 +26,7 @@ if os.path.exists('.git'):
     sys.exit(3)
 
 info_fname = 'update_info.json'
+binary_fname = 'update.exe'
 
 url = json.load(open(info_fname))
 
@@ -61,6 +62,10 @@ for info in zipf.infolist():
         top_dir_len = len(info.filename)
     else:
         fname = info.filename[top_dir_len:]
+        if fname == binary_fname:
+            print '** %s updated. **' % binary_fname
+            print '  Please download from Github.'
+            continue
         if fname[-1] == '/':
             if not os.path.exists(fname):
                 
