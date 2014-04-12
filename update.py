@@ -4,9 +4,12 @@
 import os
 import sys
 import urllib2
-import simplejson as json
 import tempfile
 import zipfile
+try:
+  import simplejson as json
+except:
+  import json      
 
 
 def prompt(msg):
@@ -18,6 +21,7 @@ def prompt(msg):
 if os.path.exists('.git'):
     print 'This directory is git repository!'
     print 'Try to use "git pull".'
+    prompt('===\nPress any key...')
     sys.exit(3)
 
 info_fname = 'update_info.json'
@@ -27,17 +31,20 @@ url = json.load(open(info_fname))
 #print url
 if not isinstance(url, list):
     print "Cannot get update information."
+    prompt('===\nPress any key...')
     sys.exit(1)
 
 tempf = tempfile.NamedTemporaryFile(delete=True)
 #print tempf.name
 
+print 'Downloading zip file from Github...'
 try:
     response = urllib2.urlopen(url[0])
     data = response.read()
 except URLError, e:
     print "Download error occurred:"
     print "    " + e.reason
+    prompt('===\nPress any key...')
     sys.exit(2)
 
 tempf.write(data)
@@ -46,6 +53,7 @@ zipf = zipfile.ZipFile(tempf)
 
 top_dir_len = -1
 
+print 'Finding modified files...'
 for info in zipf.infolist():
     if top_dir_len < 0:
         top_dir_len = len(info.filename)
@@ -71,3 +79,7 @@ for info in zipf.infolist():
     
 zipf.close()
 tempf.close()
+
+prompt('===\nUpdate complete. Press any key...')
+
+
