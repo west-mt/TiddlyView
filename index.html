@@ -11,14 +11,22 @@
 	<script src="lib/dialect_tiddly.js" type="text/javascript"></script>
     <script src="lib/tiddlyview.js" type="text/javascript"></script>
   </head>
+  <!--<body contextmenu="edit-history-menu">-->
   <body>
 	<div id="drop_zone">
-	  <input type="file" id="read_file" />
 	  <div id="notice">
 		ここに表示するファイルをドロップしてください。
 	  </div>
 	  <div id="preview"></div>
-
+	  <input type="file" id="read_file" />
+	  <input type="hidden" id="read_data" />
 	</div>
+
+	<!--
+	<menu type="context" id="edit-history-menu">
+      <menuitem data-action="$edit" label="Edit page"></menuitem>
+      <menuitem data-action="$history" label="View page history"></menuitem>
+	</menu>
+	-->
   </body>
 </html>
