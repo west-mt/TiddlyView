@@ -18,6 +18,38 @@ def prompt(msg):
     r = raw_input()
     return r
 
+def chunk_report(bytes_so_far, chunk_size, total_size):
+    if total_size > 0:
+        percent = float(bytes_so_far) / total_size * 100
+        sys.stdout.write('Downloaded %d / %d bytes (%0.2f%%)\r' % 
+                         (bytes_so_far, total_size, percent))
+    else:
+        sys.stdout.write('Downloaded %d bytes (%0.2f%%)\r' % bytes_so_far)
+
+
+def chunk_read(response, chunk_size=8192, report_hook=None):
+    try:
+        total_size = int(response.info().getheader('Content-Length').strip())
+    except:
+        total_size = 0
+
+    bytes_so_far = 0
+    data = ''
+
+    while True:
+        chunk = response.read(chunk_size)
+        bytes_so_far += len(chunk)
+
+        if not chunk:
+            break
+
+        data += chunk
+        if report_hook:
+            report_hook(bytes_so_far, chunk_size, total_size)
+
+    sys.stdout.write('\n\n')
+    return data
+
 
 if os.path.exists('.git'):
     print 'This directory is git repository!'
@@ -27,6 +59,11 @@ if os.path.exists('.git'):
 
 info_fname = 'update_info.json'
 binary_fname = 'update.exe'
+old_binary_fname = 'update.exe.OLD'
+
+
+if os.path.exists(old_binary_fname):
+    os.remove(old_binary_fname)
 
 url = json.load(open(info_fname))
 
@@ -42,7 +79,8 @@ tempf = tempfile.NamedTemporaryFile(delete=True)
 print 'Downloading zip file from Github...'
 try:
     response = urllib2.urlopen(url[0])
-    data = response.read()
+    #data = response.read()
+    data = chunk_read(response, report_hook=chunk_report)
 except URLError, e:
     print "Download error occurred:"
     print "    " + e.reason
@@ -90,17 +128,19 @@ for info in zipf.infolist():
                 orig_md5 = hashlib.md5(open(fname, 'rb').read()).hexdigest()
 
                 if zip_md5 != orig_md5:
-                    if fname == binary_fname:
-                        print '** %s updated. **' % binary_fname
-                        print '  Please download from Github.'
-                        continue
-
                     r = 'n'
                     if not overwrite:
                         r = prompt('Update modified file "'+fname+'"? (y/N/all)')
                         if r == 'all':
                             overwrite = True
                     if r == 'y' or overwrite:
+                        if fname == binary_fname:
+                            print '** %s updated. **' % binary_fname
+                            os.rename(binary_fname, old_binary_fname)
+
+                            print '  %s has been renamed to \"%s\".' % (binary_fname, old_binary_fname)
+                            print '  You can remove %s manually, or it will be automatically removed in the next time.' % old_binary_fname
+
                         data = zipf.read(info)
                         open(fname, 'wb').write(data)
                         print 'Update: ' + fname
