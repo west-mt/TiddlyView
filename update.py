@@ -24,7 +24,7 @@ def chunk_report(bytes_so_far, chunk_size, total_size):
         sys.stdout.write('Downloaded %d / %d bytes (%0.2f%%)\r' % 
                          (bytes_so_far, total_size, percent))
     else:
-        sys.stdout.write('Downloaded %d bytes (%0.2f%%)\r' % bytes_so_far)
+        sys.stdout.write('Downloaded %d bytes\r' % bytes_so_far)
 
 
 def chunk_read(response, chunk_size=8192, report_hook=None):
@@ -81,7 +81,7 @@ try:
     response = urllib2.urlopen(url[0])
     #data = response.read()
     data = chunk_read(response, report_hook=chunk_report)
-except URLError, e:
+except urllib2.URLError, e:
     print "Download error occurred:"
     print "    " + e.reason
     prompt('===\nPress any key...')
